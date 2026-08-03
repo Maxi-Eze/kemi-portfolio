@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-/* =========================
-   ROOT – Softened dark red + deep blue
-========================= */
+
 :root {
     --bg: #ffffff;
     --text: #0f172a;
@@ -24,9 +22,7 @@
     --surface: #fdf6f7;
 }
 
-/* =========================
-   RESET
-========================= */
+
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -115,7 +111,11 @@ nav ul a {
     transition: color 0.3s;
 }
 
-nav ul a:hover { color: var(--primary); }
+nav ul a:hover,
+nav ul a.active { color: var(--primary); }
+
+/* First section on inner pages needs extra top space to clear the fixed navbar */
+.page-top { padding-top: 120px; }
 
 .nav-btn {
     background: var(--primary);
@@ -351,6 +351,11 @@ nav ul a:hover { color: var(--primary); }
 
 .about-socials a:hover { color: var(--primary); }
 
+.about-cta {
+    display: inline-block;
+    margin-top: 1.8rem;
+}
+
 .about-stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -448,6 +453,32 @@ nav ul a:hover { color: var(--primary); }
 }
 
 .service-card ul li:last-child { border-bottom: none; }
+
+/* Make cards equal-height so the button sits at the bottom */
+.service-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.service-card ul { flex: 1; }
+
+.service-btn {
+    margin-top: auto;
+    display: inline-block;
+    text-align: center;
+    background: var(--primary);
+    color: white;
+    padding: 0.7rem 1.2rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: background 0.3s;
+}
+
+.service-btn:hover { background: var(--primary-dark); }
+
+.service-card.featured .service-btn { background: var(--accent); }
+.service-card.featured .service-btn:hover { background: var(--accent-mid); }
 
 .service-price {
     display: flex;

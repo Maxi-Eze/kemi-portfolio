@@ -2,17 +2,19 @@
 const menuToggle = document.getElementById('menuToggle');
 const navLinks = document.getElementById('navLinks');
 
-menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    menuToggle.classList.toggle('active');
-});
-
-document.querySelectorAll(".sidebar a").forEach(link => {
-    link.addEventListener("click", () => {
-        navLinks.classList.remove('active');
-        menuToggle.classList.remove('active');
+if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        menuToggle.classList.toggle('active');
     });
-});
+
+    document.querySelectorAll(".sidebar a").forEach(link => {
+        link.addEventListener("click", () => {
+            navLinks.classList.remove('active');
+            menuToggle.classList.remove('active');
+        });
+    });
+}
 
 /* ---- PORTFOLIO FILTER ---- */
 const filterBtns = document.querySelectorAll('.filter-btn');
@@ -36,7 +38,7 @@ filterBtns.forEach(btn => {
     });
 });
 
-/* ---- AUTO-PLAY VIDEOS ON SCROLL ---- */
+/* ---- VIDEO AUTOPLAY ON SCROLL ---- */
 const videos = document.querySelectorAll('.video-wrapper video');
 
 if ('IntersectionObserver' in window) {
@@ -57,57 +59,73 @@ if ('IntersectionObserver' in window) {
         videoObserver.observe(video);
     });
 }
+
+/* ---- PRE-SELECT SERVICE IN CONTACT FORM (from ?service= link) ---- */
+const serviceSelect = document.querySelector('form select[name="service"]');
+
+if (serviceSelect) {
+    const requested = new URLSearchParams(window.location.search).get('service');
+    if (requested) {
+        const match = Array.from(serviceSelect.options)
+            .find(opt => opt.text.trim() === requested.trim());
+        if (match) match.selected = true;
+    }
+}
+
 /* ---- LIGHTBOX ---- */
 const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightboxImg');
-const lightboxVideo = document.getElementById('lightboxVideo');
-const lightboxCaption = document.getElementById('lightboxCaption');
-const lightboxClose = document.getElementById('lightboxClose');
-const lightboxBackdrop = document.getElementById('lightboxBackdrop');
 
-function openLightbox(type, src, title) {
-    lightboxCaption.textContent = title || '';
+if (lightbox) {
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxVideo = document.getElementById('lightboxVideo');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxBackdrop = document.getElementById('lightboxBackdrop');
 
-    if (type === 'image') {
-        lightboxImg.src = src;
-        lightboxImg.style.display = 'block';
-        lightboxVideo.style.display = 'none';
-        lightboxVideo.pause();
-        lightboxVideo.src = '';
-    } else {
-        lightboxVideo.src = src;
-        lightboxVideo.style.display = 'block';
-        lightboxImg.style.display = 'none';
-        lightboxImg.src = '';
-        lightboxVideo.play();
+    function openLightbox(type, src, title) {
+        lightboxCaption.textContent = title || '';
+
+        if (type === 'image') {
+            lightboxImg.src = src;
+            lightboxImg.style.display = 'block';
+            lightboxVideo.style.display = 'none';
+            lightboxVideo.pause();
+            lightboxVideo.src = '';
+        } else {
+            lightboxVideo.src = src;
+            lightboxVideo.style.display = 'block';
+            lightboxImg.style.display = 'none';
+            lightboxImg.src = '';
+            lightboxVideo.play();
+        }
+
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
     }
 
-    lightbox.classList.add('open');
-    document.body.style.overflow = 'hidden';
-}
+    function closeLightbox() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+        lightboxVideo.pause();
+        lightboxVideo.src = '';
+        lightboxImg.src = '';
+    }
 
-function closeLightbox() {
-    lightbox.classList.remove('open');
-    document.body.style.overflow = '';
-    lightboxVideo.pause();
-    lightboxVideo.src = '';
-    lightboxImg.src = '';
-}
-
-document.querySelectorAll('.lightbox-trigger').forEach(img => {
-    img.addEventListener('click', () => {
-        openLightbox('image', img.src, img.getAttribute('data-title'));
+    document.querySelectorAll('.lightbox-trigger').forEach(img => {
+        img.addEventListener('click', () => {
+            openLightbox('image', img.src, img.getAttribute('data-title'));
+        });
     });
-});
 
-document.querySelectorAll('.lightbox-video-trigger').forEach(wrapper => {
-    wrapper.addEventListener('click', () => {
-        openLightbox('video', wrapper.getAttribute('data-src'), wrapper.getAttribute('data-title'));
+    document.querySelectorAll('.lightbox-video-trigger').forEach(wrapper => {
+        wrapper.addEventListener('click', () => {
+            openLightbox('video', wrapper.getAttribute('data-src'), wrapper.getAttribute('data-title'));
+        });
     });
-});
 
-lightboxClose.addEventListener('click', closeLightbox);
-lightboxBackdrop.addEventListener('click', closeLightbox);
-document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeLightbox();
-});
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxBackdrop.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeLightbox();
+    });
+}
