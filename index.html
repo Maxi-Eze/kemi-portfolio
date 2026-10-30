@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KE Creatives – Creative Solutions for Brands</title>
     <link rel="stylesheet" href="./ke-creatives.css">
 </head>
+
 <body>
 
     <!-- NAVBAR -->
@@ -35,11 +37,12 @@
     <!-- HERO -->
     <section class="hero" id="hero">
         <div class="hero-text">
-            <span class="badge">Creative Director & Social Media Manager</span>
+            <span class="badge">Social Media Strategist & Content Creator</span>
             <h1>Creative Solutions for Brands That Want to <em>Grow.</em></h1>
-            <p>Helping brands grow through compelling content, strategic social media management, stunning visuals, and video editing that converts.</p>
+            <p>Helping brands grow through compelling content, strategic social media management, stunning visuals, and
+                video editing that converts.</p>
             <div class="hero-tags">
-                <span>Social Media</span>
+                <span>Social Media Management</span>
                 <span>Content Creation</span>
                 <span>Graphic Design</span>
                 <span>Video Editing</span>
@@ -56,12 +59,12 @@
         <div class="hero-image">
             <img src="./media/kemi profile.jpg" alt="KE Creatives – Kemiesther Kareem">
             <div class="hero-float card-float-1">
-                <strong>20+</strong>
-                <span>Brands Managed</span>
+                <strong>8+</strong>
+                <span>brands managed so far</span>
             </div>
             <div class="hero-float card-float-2">
-                <strong>250K+</strong>
-                <span>Reach Generated</span>
+                <strong>20,000+</strong>
+                <span>Organic Content Views Across Brands</span>
             </div>
         </div>
     </section>
@@ -70,46 +73,46 @@
     <section class="testimonials" id="testimonials">
         <div class="section-header">
             <h2>What Clients Say</h2>
-            <p>Results and relationships that speak for themselves.</p>
+            <p>Real messages from real clients.</p>
         </div>
 
         <div class="testimonials-grid">
 
-            <div class="testimonial-card">
-                <div class="stars">★★★★★</div>
-                <p>"KE Creatives completely transformed our online presence. Our page feels professional and our followers actually engage now."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">FB</div>
-                    <div>
-                        <h4>Owenise  Fashion Brand Owner</h4>
-                        <span>Lagos, Nigeria</span>
-                    </div>
-                </div>
-            </div>
+            <figure class="shot">
+                <img src="./media/testimonial-1.jpg" alt="Client testimonial screenshot" class="lightbox-trigger"
+                    data-title="Owenise Fashion">
+                <figcaption>Owenise Fashion</figcaption>
+            </figure>
 
-            <div class="testimonial-card">
-                <div class="stars">★★★★★</div>
-                <p>"Our engagement doubled after just a few months. The content calendar alone changed how we plan everything."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">RE</div>
-                    <div>
-                        <h4>Gotland Founder</h4>
-                        <span>Nigeria</span>
-                    </div>
-                </div>
-            </div>
+            <figure class="shot">
+                <img src="./media/testimonial-2.jpg" alt="Client testimonial screenshot" class="lightbox-trigger"
+                    data-title="Gotland">
+                <figcaption>Gotland</figcaption>
+            </figure>
 
-            <div class="testimonial-card">
-                <div class="stars">★★★★★</div>
-                <p>"Professional, organised, and extremely reliable. The reels she edited for us performed better than anything we'd done before."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">LF</div>
-                    <div>
-                        <h4>Tim-Ferad Logistics Manager</h4>
-                        <span>Ibadan, Nigeria</span>
-                    </div>
-                </div>
-            </div>
+            <figure class="shot">
+                <img src="./media/testimonial-3.jpg" alt="Client testimonial screenshot" class="lightbox-trigger"
+                    data-title="Tim-Ferad Logistics">
+                <figcaption>Tim-Ferad Logistics</figcaption>
+            </figure>
+
+            <figure class="shot">
+                <img src="./media/testimonial-4.jpg" alt="Client testimonial screenshot" class="lightbox-trigger"
+                    data-title="Owenise Avery">
+                <figcaption>Owenise Avery</figcaption>
+            </figure>
+
+            <figure class="shot">
+                <img src="./media/testimonial-5.jpg" alt="Client testimonial screenshot" class="lightbox-trigger"
+                    data-title="Client name">
+                <figcaption>Client name</figcaption>
+            </figure>
+
+            <figure class="shot">
+                <img src="./media/testimonial-6.jpg" alt="Client testimonial screenshot" class="lightbox-trigger"
+                    data-title="Client name">
+                <figcaption>Client name</figcaption>
+            </figure>
 
         </div>
     </section>
@@ -126,6 +129,18 @@
         </div>
     </footer>
 
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">✕</button>
+        <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightboxImg">
+            <video id="lightboxVideo" controls autoplay loop playsinline></video>
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+        </div>
+    </div>
+
     <script src="./ke-creatives.js"></script>
 </body>
+
 </html>

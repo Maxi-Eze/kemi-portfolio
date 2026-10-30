@@ -45,7 +45,7 @@ if ('IntersectionObserver' in window) {
     const videoObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.play();
+                entry.target.play().catch(() => {});
             } else {
                 entry.target.pause();
             }
@@ -127,5 +127,39 @@ if (lightbox) {
     lightboxBackdrop.addEventListener('click', closeLightbox);
     document.addEventListener('keydown', e => {
         if (e.key === 'Escape') closeLightbox();
+    });
+}
+
+/* ---- COUNT-UP STATS ---- */
+const counters = document.querySelectorAll('.count');
+
+if (counters.length && 'IntersectionObserver' in window) {
+    const animateCount = el => {
+        const target = Number(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1600;
+        const start = performance.now();
+
+        const tick = now => {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(target * eased).toLocaleString('en-US') + suffix;
+            if (progress < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+    };
+
+    const counterObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCount(entry.target);
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.6 });
+
+    counters.forEach(c => {
+        c.textContent = '0' + (c.dataset.suffix || '');
+        counterObserver.observe(c);
     });
 }
